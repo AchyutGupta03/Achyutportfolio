@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>achyutgupta35.com — Achyut Gupta | AI Engineer</title>
+<meta name="description" content="Achyut Gupta — Aspiring AI Engineer, B.Tech AIML student, Data Analyst Intern, IEEE Program Head.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Manrope:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#f7f1e6;
+    --bg-deep:#efe4cf;
+    --surface:#fffdf8;
+    --ink:#251f1a;
+    --ink-soft:#665a4c;
+    --ink-faint:#a3937d;
+    --gold:#a87f2e;
+    --gold-deep:#8a6620;
+    --gold-soft:rgba(168,127,46,0.13);
+    --forest:#3f5b44;
+    --forest-soft:rgba(63,91,68,0.11);
+    --line:rgba(37,31,26,0.11);
+    --line-strong:rgba(37,31,26,0.22);
+    --radius:12px;
+    --maxw:1160px;
+    --shadow:0 24px 50px -30px rgba(37,31,26,0.4);
+  }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html{ scroll-behavior:smooth; overflow-x:hidden; width:100%; }
+  body{
+    background:var(--bg);
+    color:var(--ink);
+    font-family:'Manrope',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+    width:100%;
+    max-width:100vw;
+  }
+  /* keep every grid/flex child shrinkable so nothing forces a wider-than-viewport layout when the window is resized */
+  .hero, .hero-copy, .hero-portrait, .readout-grid, .readout-item,
+  .about-grid, .skills-grid, .skill-card, .exp-card, .proj-row, .proj-body,
+  .cert-grid, .cert-card, .badge-grid, .badge-card, .lead-grid, .lead-card,
+  .navlinks, .masthead-inner, .footer-inner, .contact-links, .contact-actions, .hero-actions{
+    min-width:0;
+  }
+  img, canvas, svg{ max-width:100%; }
+  .brand-word, .proj-link, .contact-links a, .cert-issuer, .cert-date, .badge-issuer, .exp-date{
+    overflow-wrap:break-word; word-break:break-word;
+  }
+  body::before{
+    content:"";
+    position:fixed; inset:0; z-index:0; pointer-events:none;
+    background:
+      radial-gradient(ellipse 800px 480px at 90% -8%, rgba(168,127,46,0.16), transparent 60%),
+      radial-gradient(ellipse 700px 460px at 0% 20%, rgba(63,91,68,0.08), transparent 60%);
+  }
+  body::after{
+    content:""; position:fixed; inset:0; z-index:1; pointer-events:none; opacity:0.035; mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  ::selection{ background:var(--gold); color:#fff; }
+  a{ color:inherit; text-decoration:none; }
+  img{ max-width:100%; display:block; }
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 32px; }
+  section{ position:relative; z-index:2; }
+  a:focus-visible, button:focus-visible{ outline:2px solid var(--gold-deep); outline-offset:3px; border-radius:4px; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+  }
+
+  /* photographs share one warm tone so certificates/badges harmonize with the portrait */
+  .tone-img{ filter:sepia(0.16) saturate(1.16) contrast(1.03) brightness(0.99); }
+
+  /* ---------- MASTHEAD ---------- */
+  .masthead{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(247,241,230,0.82);
+    backdrop-filter:blur(14px) saturate(140%);
+    -webkit-backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid var(--line);
+  }
+  .masthead-inner{
+    max-width:var(--maxw); margin:0 auto; padding:0 32px;
+    height:74px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{ display:flex; align-items:center; gap:11px; }
+  .brand-mark{
+    width:36px; height:36px; border-radius:50%; border:1.5px solid var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Fraunces',serif; font-weight:600; font-size:14px; color:var(--gold-deep);
+  }
+  .brand-word{ font-family:'IBM Plex Mono',monospace; font-size:12.5px; letter-spacing:0.03em; color:var(--ink); }
+  .brand-word b{ font-weight:600; }
+  .navlinks{ display:flex; gap:4px; }
+  .navlinks a{
+    font-family:'Manrope',sans-serif; font-size:13px; font-weight:600; color:var(--ink-soft);
+    padding:9px 15px; border-radius:100px; transition:color .2s ease, background .2s ease;
+  }
+  .navlinks a:hover{ color:var(--ink); background:var(--gold-soft); }
+  .navlinks a.active{ color:var(--gold-deep); background:var(--gold-soft); }
+  .nav-cta{
+    font-family:'Manrope',sans-serif; font-weight:700; font-size:13px;
+    background:var(--ink); color:var(--bg); padding:10px 20px; border-radius:100px;
+    transition:all .2s ease; white-space:nowrap;
+  }
+  .nav-cta:hover{ background:var(--gold-deep); transform:translateY(-1px); }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    padding:158px 0 80px;
+    display:grid; grid-template-columns:1.02fr 0.98fr; gap:56px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:9px;
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--forest);
+    letter-spacing:0.04em; margin-bottom:24px;
+  }
+  .eyebrow::before{ content:""; width:26px; height:1px; background:var(--forest); display:inline-block; }
+  .hero h1{
+    font-family:'Fraunces',serif; font-weight:600;
+    font-size:clamp(2.5rem, 4.8vw, 3.9rem);
+    line-height:1.08; letter-spacing:-0.01em; margin-bottom:22px;
+  }
+  .hero h1 em{ font-style:italic; font-weight:500; color:var(--gold-deep); }
+  .hero p.lede{ font-size:1.08rem; color:var(--ink-soft); line-height:1.75; max-width:500px; margin-bottom:34px; }
+  .hero-actions{ display:flex; gap:14px; flex-wrap:wrap; margin-bottom:40px; }
+  .btn{
+    font-family:'Manrope',sans-serif; font-weight:700; font-size:14.5px;
+    padding:14px 26px; border-radius:100px; display:inline-flex; align-items:center; gap:8px;
+    transition:transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+  }
+  .btn-primary{ background:var(--ink); color:var(--bg); box-shadow:0 10px 26px -12px rgba(37,31,26,0.55); }
+  .btn-primary:hover{ background:var(--gold-deep); transform:translateY(-2px); }
+  .btn-ghost{ border:1.5px solid var(--line-strong); color:var(--ink); }
+  .btn-ghost:hover{ border-color:var(--gold-deep); color:var(--gold-deep); transform:translateY(-2px); }
+
+  .role-rotator{
+    display:flex; align-items:center; gap:12px; font-family:'IBM Plex Mono',monospace; font-size:12.5px; color:var(--ink-faint);
+  }
+  .role-rotator .rr-dot{ width:6px; height:6px; border-radius:50%; background:var(--forest); animation:pulse-dot 2.4s ease-out infinite; }
+  @keyframes pulse-dot{
+    0%{ box-shadow:0 0 0 0 rgba(63,91,68,0.5); } 70%{ box-shadow:0 0 0 7px rgba(63,91,68,0); } 100%{ box-shadow:0 0 0 0 rgba(63,91,68,0); }
+  }
+  #rrText{ color:var(--ink); font-weight:500; }
+
+  .hero-portrait{ position:relative; }
+  .portrait-frame{
+    position:relative; border-radius:20px; overflow:hidden; z-index:2;
+    border:1px solid var(--line); box-shadow:var(--shadow);
+  }
+  .portrait-frame img{ width:100%; aspect-ratio:4/5; object-fit:cover; }
+  .portrait-canvas{ position:absolute; inset:-60px; z-index:1; }
+  .portrait-plate{
+    position:absolute; left:20px; right:20px; bottom:20px; z-index:3;
+    background:rgba(255,253,248,0.88); backdrop-filter:blur(8px);
+    border:1px solid var(--line); border-radius:10px; padding:14px 16px;
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+  }
+  .portrait-plate .pp-name{ font-family:'Fraunces',serif; font-weight:600; font-size:15px; }
+  .portrait-plate .pp-role{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--gold-deep); margin-top:2px; }
+  .portrait-plate .pp-status{
+    font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--forest);
+    border:1px solid var(--forest-soft); background:var(--forest-soft); padding:5px 10px; border-radius:100px; white-space:nowrap;
+  }
+
+  /* ---------- READOUT ---------- */
+  .readout{ border-top:1px solid var(--line); border-bottom:1px solid var(--line); padding:36px 0; }
+  .readout-grid{ display:grid; grid-template-columns:repeat(5,1fr); }
+  .readout-item{ text-align:center; padding:0 10px; border-right:1px solid var(--line); }
+  .readout-item:last-child{ border-right:none; }
+  .readout-val{ font-family:'Fraunces',serif; font-size:2rem; font-weight:600; color:var(--ink); }
+  .readout-val em{ font-style:italic; color:var(--gold-deep); }
+  .readout-label{ font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ink-faint); margin-top:7px; text-transform:uppercase; letter-spacing:0.06em; }
+
+  /* ---------- SECTIONS ---------- */
+  .section{ padding:112px 0; }
+  .section-tag{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--gold-deep);
+    display:flex; align-items:center; gap:10px; margin-bottom:16px; letter-spacing:0.05em; text-transform:uppercase;
+  }
+  .section-tag::before{ content:""; width:24px; height:1px; background:var(--gold-deep); display:inline-block; }
+  .section-title{
+    font-family:'Fraunces',serif; font-weight:600; letter-spacing:-0.01em;
+    font-size:clamp(1.8rem,3vw,2.5rem); margin-bottom:16px;
+  }
+  .section-title em{ font-style:italic; color:var(--gold-deep); font-weight:500; }
+  .section-sub{ color:var(--ink-soft); max-width:600px; line-height:1.75; font-size:1rem; }
+  .section-head{ margin-bottom:52px; }
+
+  .reveal{ opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.in{ opacity:1; transform:none; }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{ display:grid; grid-template-columns:0.95fr 1.05fr; gap:64px; align-items:start; }
+  .pull-quote{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:500;
+    font-size:1.5rem; line-height:1.5; color:var(--ink); position:relative; padding-left:26px; margin-bottom:8px;
+  }
+  .pull-quote::before{ content:"“"; position:absolute; left:-6px; top:-14px; font-size:3rem; color:var(--gold); font-family:'Fraunces',serif; }
+  .quote-attr{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint); margin-bottom:36px; margin-left:26px; }
+  .about-text p{ color:var(--ink-soft); line-height:1.85; margin-bottom:18px; font-size:0.99rem; }
+  .about-text strong{ color:var(--ink); font-weight:700; }
+  .role-strip{ display:flex; flex-wrap:wrap; gap:10px; margin-top:22px; }
+  .role-chip{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-soft);
+    border:1px solid var(--line); background:var(--surface); padding:8px 14px; border-radius:100px;
+  }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; }
+  .skill-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px 22px; transition:transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    border-top:2.5px solid transparent;
+  }
+  .skill-card:hover{ transform:translateY(-5px); border-top-color:var(--gold); box-shadow:var(--shadow); }
+  .skill-num{ font-family:'Fraunces',serif; font-style:italic; font-size:1.4rem; color:var(--gold-deep); margin-bottom:14px; display:block; }
+  .skill-card h4{ font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem; margin-bottom:12px; }
+  .skill-tags{ display:flex; flex-wrap:wrap; gap:6px; }
+  .skill-tags span{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--ink-soft);
+    background:var(--bg-deep); border:1px solid var(--line); padding:4px 9px; border-radius:6px;
+  }
+
+  /* ---------- EXPERIENCE ---------- */
+  .exp-card{
+    display:grid; grid-template-columns:210px 1fr; gap:38px;
+    border:1px solid var(--line); border-radius:var(--radius); background:var(--surface);
+    padding:36px; position:relative; overflow:hidden; box-shadow:var(--shadow);
+  }
+  .exp-card::before{ content:""; position:absolute; left:0; top:0; bottom:0; width:3px; background:linear-gradient(180deg,var(--gold),var(--forest)); }
+  .exp-meta .exp-org{ font-family:'Fraunces',serif; font-weight:600; font-size:1.1rem; margin-bottom:7px; }
+  .exp-meta .exp-date{ font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--gold-deep); }
+  .exp-role{ font-size:1.2rem; font-weight:700; margin-bottom:16px; font-family:'Fraunces',serif; }
+  .exp-list{ list-style:none; }
+  .exp-list li{ position:relative; padding-left:22px; margin-bottom:12px; color:var(--ink-soft); line-height:1.7; font-size:0.96rem; }
+  .exp-list li::before{ content:"—"; position:absolute; left:0; color:var(--gold-deep); }
+  .exp-tools{ display:flex; flex-wrap:wrap; gap:8px; margin-top:20px; }
+  .exp-tools span{
+    font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--forest);
+    background:var(--forest-soft); border:1px solid rgba(63,91,68,0.22); padding:5px 11px; border-radius:6px;
+  }
+
+  /* ---------- PROJECTS ---------- */
+  .proj-series{ display:flex; flex-direction:column; border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--surface); box-shadow:var(--shadow); }
+  .proj-row{
+    display:grid; grid-template-columns:60px 1fr auto; align-items:center; gap:20px;
+    padding:24px 28px; border-bottom:1px solid var(--line); transition:background .2s ease;
+  }
+  .proj-row:last-child{ border-bottom:none; }
+  .proj-row:hover{ background:var(--bg-deep); }
+  .proj-index{
+    font-family:'Fraunces',serif; font-style:italic; font-weight:600; font-size:1.3rem; color:var(--ink-faint);
+    display:flex; align-items:center; justify-content:center;
+    width:46px; height:46px; border-radius:50%; border:1px solid var(--line);
+  }
+  .proj-row:hover .proj-index{ color:var(--gold-deep); border-color:var(--gold); }
+  .proj-body h4{ font-family:'Fraunces',serif; font-weight:600; font-size:1.05rem; margin-bottom:5px; }
+  .proj-body p{ color:var(--ink-soft); font-size:0.92rem; line-height:1.6; }
+  .proj-link{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink);
+    border:1px solid var(--line-strong); padding:9px 16px; border-radius:100px;
+    white-space:nowrap; transition:all .2s ease;
+  }
+  .proj-link:hover{ border-color:var(--gold-deep); color:var(--gold-deep); background:var(--gold-soft); }
+  .proj-cta{ text-align:center; margin-top:30px; }
+
+  /* ---------- CERTIFICATIONS ---------- */
+  .cert-group{ margin-bottom:54px; }
+  .cert-group:last-child{ margin-bottom:0; }
+  .cert-group-label{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint);
+    text-transform:uppercase; letter-spacing:0.09em; margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .cert-group-label::after{ content:""; flex:1; height:1px; background:var(--line); }
+  .cert-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .cert-card{
+    border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--surface);
+    transition:transform .25s ease, box-shadow .25s ease; display:flex; flex-direction:column;
+  }
+  .cert-card:hover{ transform:translateY(-5px); box-shadow:var(--shadow); }
+  .cert-thumb{ aspect-ratio:16/10.5; overflow:hidden; border-bottom:1px solid var(--line); background:var(--bg-deep); }
+  .cert-thumb img{ width:100%; height:100%; object-fit:cover; transition:transform .4s ease; }
+  .cert-card:hover .cert-thumb img{ transform:scale(1.05); }
+  .cert-info{ padding:17px 19px; flex:1; display:flex; flex-direction:column; }
+  .cert-info h5{ font-family:'Fraunces',serif; font-weight:600; font-size:0.98rem; margin-bottom:6px; line-height:1.35; }
+  .cert-info .cert-issuer{ font-family:'IBM Plex Mono',monospace; font-size:10.5px; color:var(--gold-deep); margin-bottom:10px; }
+  .cert-info .cert-date{ font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ink-faint); margin-top:auto; padding-top:10px; border-top:1px dashed var(--line); }
+
+  /* ---------- BADGES ---------- */
+  .badge-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px; }
+  .badge-card{
+    text-align:center; padding:28px 16px 22px; border:1px solid var(--line); border-radius:var(--radius);
+    background:var(--surface); transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .badge-card:hover{ transform:translateY(-5px); box-shadow:var(--shadow); }
+  .badge-ring{
+    width:92px; height:92px; border-radius:50%; margin:0 auto 16px; overflow:hidden;
+    border:2px solid var(--gold); padding:3px; background:var(--gold-soft);
+  }
+  .badge-ring img{ width:100%; height:100%; object-fit:cover; border-radius:50%; }
+  .badge-card h5{ font-family:'Fraunces',serif; font-weight:600; font-size:0.9rem; margin-bottom:6px; line-height:1.35; }
+  .badge-card .badge-issuer{ font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--ink-faint); }
+  .badge-verify{ display:inline-block; margin-top:10px; font-family:'IBM Plex Mono',monospace; font-size:10px; color:var(--gold-deep); border-bottom:1px solid var(--gold); }
+
+  /* ---------- LEADERSHIP ---------- */
+  .lead-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; }
+  .lead-card{
+    border:1px solid var(--line); border-radius:var(--radius); background:var(--surface);
+    padding:32px; transition:transform .25s ease, box-shadow .25s ease;
+  }
+  .lead-card:hover{ transform:translateY(-5px); box-shadow:var(--shadow); }
+  .lead-icon{
+    width:46px; height:46px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    background:var(--forest-soft); color:var(--forest); font-family:'Fraunces',serif; font-style:italic; font-size:1.2rem; margin-bottom:18px;
+    border:1px solid rgba(63,91,68,0.22);
+  }
+  .lead-card h4{ font-family:'Fraunces',serif; font-weight:600; font-size:1.12rem; margin-bottom:9px; }
+  .lead-card p{ color:var(--ink-soft); font-size:0.94rem; line-height:1.7; }
+
+  /* ---------- CONTACT ---------- */
+  .contact-panel{
+    border:1px solid var(--line); border-radius:22px; padding:66px 56px;
+    background:radial-gradient(circle at 25% 15%, rgba(168,127,46,0.14), transparent 55%), var(--surface);
+    position:relative; overflow:hidden; text-align:center; box-shadow:var(--shadow);
+  }
+  .contact-panel h2{
+    font-family:'Fraunces',serif; font-weight:600; font-size:clamp(1.9rem,4vw,2.9rem);
+    margin-bottom:18px; letter-spacing:-0.01em;
+  }
+  .contact-panel h2 em{ font-style:italic; color:var(--gold-deep); font-weight:500; }
+  .contact-panel p{ color:var(--ink-soft); max-width:520px; margin:0 auto 36px; line-height:1.75; }
+  .contact-actions{ display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:42px; }
+  .contact-links{ display:flex; gap:28px; justify-content:center; flex-wrap:wrap; }
+  .contact-links a{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft);
+    display:flex; align-items:center; gap:8px; transition:color .2s ease;
+  }
+  .contact-links a:hover{ color:var(--gold-deep); }
+
+  footer{ padding:38px 0; border-top:1px solid var(--line); }
+  .footer-inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+  .footer-inner p{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:980px){
+    .hero{ grid-template-columns:1fr; padding-top:132px; }
+    .hero-portrait{ order:-1; max-width:380px; margin:0 auto; }
+    .about-grid{ grid-template-columns:1fr; }
+    .skills-grid{ grid-template-columns:repeat(2,1fr); }
+    .cert-grid{ grid-template-columns:repeat(2,1fr); }
+    .badge-grid{ grid-template-columns:repeat(2,1fr); }
+    .lead-grid{ grid-template-columns:1fr; }
+    .readout-grid{ grid-template-columns:repeat(3,1fr); row-gap:24px; }
+    .readout-item:nth-child(3){ border-right:none; }
+    .navlinks{ display:none; }
+    .exp-card{ grid-template-columns:1fr; gap:16px; }
+    .contact-panel{ padding:50px 28px; }
+  }
+  @media (max-width:600px){
+    .wrap{ padding:0 20px; }
+    .masthead-inner{ padding:0 20px; }
+    .skills-grid{ grid-template-columns:1fr 1fr; }
+    .cert-grid{ grid-template-columns:1fr; }
+    .badge-grid{ grid-template-columns:1fr 1fr; }
+    .readout-grid{ grid-template-columns:repeat(2,1fr); }
+    .readout-item:nth-child(2n){ border-right:none; }
+    .section{ padding:78px 0; }
+    .nav-cta{ display:none; }
+    .proj-row{ grid-template-columns:44px 1fr; }
+    .proj-link{ grid-column:1/-1; text-align:center; }
+  }
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-inner">
+    <div class="brand">
+      <div class="brand-mark">AG</div>
+      <div class="brand-word"><b>achyutgupta35</b>.com</div>
+    </div>
+    <nav class="navlinks" id="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#certifications">Certifications</a>
+      <a href="#badges">Badges</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="nav-cta" href="mailto:achyutgupta.12@gmail.com">Say hello</a>
+  </div>
+</div>
+
+<!-- HERO -->
+<header class="hero wrap" id="hero">
+  <div class="hero-copy">
+    <div class="eyebrow">Portfolio — Achyut Gupta</div>
+    <h1>Turning curiosity into <em>intelligent</em>, real‑world solutions.</h1>
+    <p class="lede">B.Tech student in Artificial Intelligence &amp; Machine Learning, exploring Generative AI and data-driven decision-making — and building practical tools along the way.</p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn btn-primary">View my work →</a>
+      <a href="#contact" class="btn btn-ghost">Get in touch</a>
+    </div>
+    <div class="role-rotator"><span class="rr-dot"></span> Currently — <span id="rrText">exploring Generative AI</span></div>
+  </div>
+
+  <div class="hero-portrait">
+    <canvas class="portrait-canvas" id="bokehCanvas"></canvas>
+    <div class="portrait-frame">
+      <img class="tone-img" src="assets/profile.jpg" alt="Achyut Gupta">
+      <div class="portrait-plate">
+        <div>
+          <div class="pp-name">Achyut Gupta</div>
+          <div class="pp-role">Aspiring AI Engineer</div>
+        </div>
+        <div class="pp-status">● Open to roles</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- READOUT -->
+<div class="readout wrap">
+  <div class="readout-grid">
+    <div class="readout-item">
+      <div class="readout-val"><em>45</em>-day</div>
+      <div class="readout-label">Data Analyst Internship</div>
+    </div>
+    <div class="readout-item">
+      <div class="readout-val"><em>9</em>+</div>
+      <div class="readout-label">Certifications Earned</div>
+    </div>
+    <div class="readout-item">
+      <div class="readout-val"><em>4</em></div>
+      <div class="readout-label">IBM Digital Badges</div>
+    </div>
+    <div class="readout-item">
+      <div class="readout-val"><em>5</em></div>
+      <div class="readout-label">Internship Task Projects</div>
+    </div>
+    <div class="readout-item">
+      <div class="readout-val"><em>2</em></div>
+      <div class="readout-label">Leadership Roles</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <div class="section-tag">Who I am</div>
+        <h2 class="section-title reveal">Aspiring AI Engineer, <em>driven by curiosity</em></h2>
+        <p class="pull-quote reveal">I believe technology has the power to create meaningful change, and I'm committed to building solutions that are intelligent, efficient, and user-focused.</p>
+        <div class="quote-attr reveal">— Achyut Gupta</div>
+      </div>
+      <div class="about-text">
+        <p class="reveal">Hi, I'm <strong>Achyut Gupta</strong> — an aspiring AI Engineer and a B.Tech student in Artificial Intelligence and Machine Learning with a passion for building intelligent solutions that solve real-world problems.</p>
+        <p class="reveal">My journey allowed me to gain hands-on experience through a <strong>45-day Data Analyst Internship at ApexPlanet Software Pvt. Ltd.</strong>, where I worked with data analysis, SQL, Python, Anaconda, Power BI, VS Code and GitHub to extract meaningful insights and support data-driven decision-making. This strengthened my analytical thinking and deepened my interest in AI and machine learning.</p>
+        <p class="reveal">I continuously invest in expanding my knowledge, earning industry-recognized certifications in Generative AI, Artificial Intelligence, Python, C, C++, HTML, CSS, and Data Analytics — supported by organizations including <strong>IBM, Microsoft, Google, Deloitte, GeeksforGeeks, and TCS iON.</strong></p>
+        <p class="reveal">Beyond technical skills, I take on leadership and community responsibilities as an active member of the <strong>Computer Society of India (CSI)</strong> and as <strong>Program Head of my IEEE Student Branch</strong>, organizing technical events and collaborative learning initiatives that inspire innovation among students.</p>
+        <div class="role-strip reveal">
+          <span class="role-chip">AI &amp; Machine Learning</span>
+          <span class="role-chip">Data Analytics</span>
+          <span class="role-chip">Generative AI</span>
+          <span class="role-chip">IEEE Program Head</span>
+          <span class="role-chip">CSI Member</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section class="section" id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Toolkit</div>
+      <h2 class="section-title reveal">What I work <em>with</em></h2>
+      <p class="section-sub reveal">The languages, platforms, and tools I use to explore AI, analyze data, and ship working software.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal">
+        <span class="skill-num">01</span>
+        <h4>AI &amp; Generative AI</h4>
+        <div class="skill-tags"><span>LLMs</span><span>IBM Granite</span><span>Prompt Design</span><span>AI Ethics</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-num">02</span>
+        <h4>Data Analytics</h4>
+        <div class="skill-tags"><span>Python</span><span>SQL</span><span>Power BI</span><span>Visualization</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-num">03</span>
+        <h4>Programming</h4>
+        <div class="skill-tags"><span>Python</span><span>C</span><span>C++</span><span>HTML/CSS</span></div>
+      </div>
+      <div class="skill-card reveal">
+        <span class="skill-num">04</span>
+        <h4>Tools &amp; Platforms</h4>
+        <div class="skill-tags"><span>VS Code</span><span>Anaconda</span><span>GitHub</span><span>Azure</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="section" id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Work</div>
+      <h2 class="section-title reveal">Where I've <em>worked</em></h2>
+      <p class="section-sub reveal">Hands-on experience translating raw data into decisions.</p>
+    </div>
+    <div class="exp-card reveal">
+      <div class="exp-meta">
+        <div class="exp-org">ApexPlanet Software Pvt. Ltd.</div>
+        <div class="exp-date">18 Jun – 30 Jul · 45 Days · Virtual</div>
+      </div>
+      <div>
+        <div class="exp-role">Data Analyst Intern</div>
+        <ul class="exp-list">
+          <li>Completed a 6-week Summer Internship Program in the Data Analytics domain, working through a structured, task-based curriculum.</li>
+          <li>Extracted meaningful insights from real-world datasets to support data-driven decision-making.</li>
+          <li>Applied data cleaning, transformation, analysis, and visualization techniques using Python, SQL, and Power BI.</li>
+          <li>Documented the full learning journey and every task across a dedicated GitHub project portfolio.</li>
+        </ul>
+        <div class="exp-tools">
+          <span>Python</span><span>SQL</span><span>Power BI</span><span>Anaconda</span><span>VS Code</span><span>GitHub</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section class="section" id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Build</div>
+      <h2 class="section-title reveal">Internship <em>task series</em></h2>
+      <p class="section-sub reveal">Five sequential tasks completed during my ApexPlanet Data Analyst internship — each building on the last.</p>
+    </div>
+    <div class="proj-series reveal">
+      <div class="proj-row">
+        <div class="proj-index">01</div>
+        <div class="proj-body">
+          <h4>Task 1 — Foundations</h4>
+          <p>First deliverable of the internship series: setting up the data workflow and initial analysis.</p>
+        </div>
+        <a class="proj-link" href="https://github.com/AchyutGupta03/ApexPlanet-Task1" target="_blank" rel="noopener">View code →</a>
+      </div>
+      <div class="proj-row">
+        <div class="proj-index">02</div>
+        <div class="proj-body">
+          <h4>Task 2 — Data Processing</h4>
+          <p>Building on Task 1 with deeper data cleaning and transformation work.</p>
+        </div>
+        <a class="proj-link" href="https://github.com/AchyutGupta03/ApexPlanet-Task2" target="_blank" rel="noopener">View code →</a>
+      </div>
+      <div class="proj-row">
+        <div class="proj-index">03</div>
+        <div class="proj-body">
+          <h4>Task 3 — Analysis</h4>
+          <p>Applying analytical techniques to extract insights from the dataset.</p>
+        </div>
+        <a class="proj-link" href="https://github.com/AchyutGupta03/ApexPlanet-Task3" target="_blank" rel="noopener">View code →</a>
+      </div>
+      <div class="proj-row">
+        <div class="proj-index">04</div>
+        <div class="proj-body">
+          <h4>Task 4 — Visualization</h4>
+          <p>Turning processed data into clear, decision-ready visualizations.</p>
+        </div>
+        <a class="proj-link" href="https://github.com/AchyutGupta03/ApexPlanet-Task4" target="_blank" rel="noopener">View code →</a>
+      </div>
+      <div class="proj-row">
+        <div class="proj-index">05</div>
+        <div class="proj-body">
+          <h4>Task 5 — Final Deliverable</h4>
+          <p>Capstone task consolidating the internship's data analytics workflow.</p>
+        </div>
+        <a class="proj-link" href="https://github.com/AchyutGupta03/ApexPlanet-Task5" target="_blank" rel="noopener">View code →</a>
+      </div>
+    </div>
+    <div class="proj-cta">
+      <a class="btn btn-ghost" href="https://github.com/AchyutGupta03" target="_blank" rel="noopener">See all repositories on GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section class="section" id="certifications">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Credentials</div>
+      <h2 class="section-title reveal">Certifications</h2>
+      <p class="section-sub reveal">Industry-recognized certifications from IBM, Microsoft, TCS iON, Deloitte, GeeksforGeeks, and more.</p>
+    </div>
+
+    <div class="cert-group">
+      <span class="cert-group-label">Internship</span>
+      <div class="cert-grid">
+        <div class="cert-card reveal">
+          <div class="cert-thumb"><img class="tone-img" src="assets/cert-apexplanet.jpg" alt="ApexPlanet Data Analytics internship certificate"></div>
+          <div class="cert-info">
+            <h5>Summer Internship — Data Analytics</h5>
+            <div class="cert-issuer mono">ApexPlanet Software Pvt. Ltd.</div>
+            <div class="cert-date">18 Jun – 30 Jul · Certificate ID: APSPL2640504</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-group">
+      <span class="cert-group-label">Cloud &amp; AI Platforms</span>
+      <div class="cert-grid">
+        <div class="cert-card reveal">
+          <div class="cert-thumb"><img class="tone-img" src="assets/cert-tcs-genai.jpg" alt="TCS iON Generative AI Essentials certificate"></div>
+          <div class="cert-info">
+            <h5>Generative AI Essentials — AI for All</h5>
+            <div class="cert-issuer mono">TCS iON · MPIT-CoE · TCS Foundation</div>
+            <div class="cert-date">Issued Jul 2026</div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-thumb"><img class="tone-img" src="assets/cert-tcs-cyber.jpg" alt="TCS iON AI and Cybersecurity Awareness certificate"></div>
+          <div class="cert-info">
+            <h5>AI &amp; Cybersecurity Awareness</h5>
+            <div class="cert-issuer mono">TCS iON · Guinness World Records</div>
+            <div class="cert-date">Issued Jun 2026</div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-thumb"><img class="tone-img" src="assets/cert-ms-azure.jpg" alt="Microsoft Azure Generative AI certificate"></div>
+          <div class="cert-info">
+            <h5>Get Started with Generative AI &amp; Agents in Azure</h5>
+            <div class="cert-issuer mono">Microsoft</div>
+            <div class="cert-date">Issued 10 Jul 2026</div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-thumb"><img class="tone-img" src="assets/cert-ms-aitools.jpg" alt="Microsoft AI journey certificate"></div>
+          <div class="cert-info">
+            <h5>AI Journey with Free AI Tools</h5>
+            <div class="cert-issuer mono">Microsoft Education</div>
+            <div class="cert-date">Issued 19 Jul 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-group">
+      <span class="cert-group-label">Workshops &amp; Simulations</span>
+      <div class="cert-grid">
+        <div class="cert-card reveal">
+          <div class="cert-thumb"><img class="tone-img" src="assets/cert-deloitte.jpg" alt="Deloitte Cyber Job Simulation certificate"></div>
+          <div class="cert-info">
+            <h5>Cyber Job Simulation</h5>
+            <div class="cert-issuer mono">Deloitte (via Forage)</div>
+            <div class="cert-date">Issued 30 Jun 2026</div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-thumb"><img class="tone-img" src="assets/cert-be10x.jpg" alt="be10x AI Tools Workshop certificate"></div>
+          <div class="cert-info">
+            <h5>AI Tools &amp; ChatGPT Workshop</h5>
+            <div class="cert-issuer mono">be10x</div>
+            <div class="cert-date">Issued 12 Jul 2026</div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-thumb"><img class="tone-img" src="assets/cert-gfg-interview.jpg" alt="GeeksforGeeks Interview Preparation Workshop certificate"></div>
+          <div class="cert-info">
+            <h5>Interview Preparation Workshop</h5>
+            <div class="cert-issuer mono">GeeksforGeeks</div>
+            <div class="cert-date">Campus Body</div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-thumb"><img class="tone-img" src="assets/cert-gfg-dbms.jpg" alt="GeeksforGeeks DBMS webinar certificate"></div>
+          <div class="cert-info">
+            <h5>Mastering Database Management Systems</h5>
+            <div class="cert-issuer mono">GeeksforGeeks · Youth United Council of India</div>
+            <div class="cert-date">28 Jun 2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BADGES -->
+<section class="section" id="badges">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Digital credentials</div>
+      <h2 class="section-title reveal">IBM SkillsBuild <em>badges</em></h2>
+      <p class="section-sub reveal">Verified digital badges earned through IBM SkillsBuild's Generative AI learning track.</p>
+    </div>
+    <div class="badge-grid">
+      <div class="badge-card reveal">
+        <div class="badge-ring"><img class="tone-img" src="assets/badge-summarizing-data.jpg" alt="Summarizing Data Using IBM Granite badge"></div>
+        <h5>Summarizing Data Using IBM Granite</h5>
+        <div class="badge-issuer mono">IBM SkillsBuild</div>
+      </div>
+      <div class="badge-card reveal">
+        <div class="badge-ring"><img class="tone-img" src="assets/badge-intro-llm.jpg" alt="Introduction to Large Language Models badge"></div>
+        <h5>Introduction to Large Language Models</h5>
+        <div class="badge-issuer mono">IBM SkillsBuild</div>
+      </div>
+      <div class="badge-card reveal">
+        <div class="badge-ring"><img class="tone-img" src="assets/badge-ethical-genai.jpg" alt="Ethical Considerations for Generative AI badge"></div>
+        <h5>Ethical Considerations for Generative AI</h5>
+        <div class="badge-issuer mono">IBM SkillsBuild</div>
+      </div>
+      <div class="badge-card reveal">
+        <div class="badge-ring"><img class="tone-img" src="assets/badge-genai-essentials.jpg" alt="Generative AI Essentials: Using LLMs to Work with Data badge"></div>
+        <h5>GenAI Essentials: Using LLMs to Work with Data</h5>
+        <div class="badge-issuer mono">IBM SkillsBuild</div>
+        <a class="badge-verify" href="https://www.credly.com/go/B7RtZWtU" target="_blank" rel="noopener">Verify credential →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEADERSHIP -->
+<section class="section" id="leadership">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">Beyond code</div>
+      <h2 class="section-title reveal">Community &amp; <em>leadership</em></h2>
+      <p class="section-sub reveal">Contributing to student tech communities alongside my technical work.</p>
+    </div>
+    <div class="lead-grid">
+      <div class="lead-card reveal">
+        <div class="lead-icon">✦</div>
+        <h4>Program Head, IEEE Student Branch</h4>
+        <p>Contribute to organizing technical events, workshops, and collaborative learning initiatives that inspire innovation among students.</p>
+      </div>
+      <div class="lead-card reveal">
+        <div class="lead-icon">✦</div>
+        <h4>Member, Computer Society of India (CSI)</h4>
+        <p>Active participant in a national community of computing professionals and students, engaging in technical learning and networking.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="contact-panel reveal">
+      <div class="section-tag" style="justify-content:center">Let's connect</div>
+      <h2>Let's build the <em>future</em> with AI.</h2>
+      <p>I'm actively looking for opportunities to grow as an AI Engineer and contribute to impactful projects in AI, ML, Data Science, and Generative AI. My inbox is open.</p>
+      <div class="contact-actions">
+        <a class="btn btn-primary" href="mailto:achyutgupta.12@gmail.com">Send me an email</a>
+        <a class="btn btn-ghost" href="tel:+918318429382">Call me</a>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:achyutgupta.12@gmail.com">✉ achyutgupta.12@gmail.com</a>
+        <a href="tel:+918318429382">📱 +91 83184 29382</a>
+        <a href="https://github.com/AchyutGupta03" target="_blank" rel="noopener">💻 github.com/AchyutGupta03</a>
+        <a href="https://www.linkedin.com/in/achyut-gupta-a62a24378" target="_blank" rel="noopener">🔗 linkedin.com/in/achyut-gupta</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <p>achyutgupta35.com · Designed &amp; built for Achyut Gupta · 2026</p>
+    <p>Made with care — AI, data &amp; a little curiosity.</p>
+  </div>
+</footer>
+
+<script>
+// ---- Nav active state on scroll ----
+const sections = document.querySelectorAll('section[id], header[id]');
+const navLinks = document.querySelectorAll('.navlinks a');
+function setActive(){
+  let current = '';
+  sections.forEach(s=>{
+    const rect = s.getBoundingClientRect();
+    if(rect.top <= 130 && rect.bottom >= 130) current = s.id;
+  });
+  navLinks.forEach(a=>{ a.classList.toggle('active', a.getAttribute('href') === '#'+current); });
+}
+document.addEventListener('scroll', setActive, { passive:true });
+
+// ---- Reveal on scroll ----
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold:0.12 });
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// ---- Role rotator ----
+const roles = ['exploring Generative AI','learning from LLMs','building with data','open to opportunities'];
+const rrText = document.getElementById('rrText');
+let ri = 0;
+if(!reduceMotion){
+  setInterval(()=>{
+    ri = (ri+1) % roles.length;
+    rrText.style.opacity = 0;
+    setTimeout(()=>{ rrText.textContent = roles[ri]; rrText.style.opacity = 1; }, 300);
+  }, 2600);
+  rrText.style.transition = 'opacity .3s ease';
+}
+
+// ---- Bokeh light particles behind portrait (echoes the warm lamp light in the photo) ----
+const canvas = document.getElementById('bokehCanvas');
+const ctx = canvas.getContext('2d');
+let W, H, motes = [];
+const MOTE_COUNT = 16;
+const colors = ['rgba(168,127,46,0.5)','rgba(63,91,68,0.28)','rgba(214,178,110,0.45)'];
+
+function resize(){
+  const rect = canvas.getBoundingClientRect();
+  W = canvas.width = rect.width * devicePixelRatio;
+  H = canvas.height = rect.height * devicePixelRatio;
+}
+function initMotes(){
+  motes = [];
+  for(let i=0;i<MOTE_COUNT;i++){
+    motes.push({
+      x: Math.random()*W,
+      y: Math.random()*H,
+      r: (Math.random()*34+14) * devicePixelRatio,
+      vy: -(Math.random()*0.18+0.05) * devicePixelRatio,
+      vx: (Math.random()-0.5)*0.06*devicePixelRatio,
+      c: colors[Math.floor(Math.random()*colors.length)],
+      o: Math.random()*0.5+0.3
+    });
+  }
+}
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  motes.forEach(m=>{
+    m.y += m.vy; m.x += m.vx;
+    if(m.y < -m.r) m.y = H + m.r;
+    if(m.x < -m.r) m.x = W + m.r;
+    if(m.x > W + m.r) m.x = -m.r;
+    const grad = ctx.createRadialGradient(m.x,m.y,0,m.x,m.y,m.r);
+    grad.addColorStop(0, m.c);
+    grad.addColorStop(1, 'rgba(0,0,0,0)');
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.arc(m.x,m.y,m.r,0,Math.PI*2);
+    ctx.fill();
+  });
+  if(!reduceMotion) requestAnimationFrame(draw);
+}
+resize(); initMotes(); draw();
+window.addEventListener('resize', ()=>{ resize(); initMotes(); });
+</script>
+</body>
+</html>
