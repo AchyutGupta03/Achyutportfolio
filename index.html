@@ -355,6 +355,29 @@
   .footer-inner{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
   .footer-inner p{ font-family:'IBM Plex Mono',monospace; font-size:11px; color:var(--ink-faint); }
 
+  /* ---------- EVENTS CONDUCTED (additive) ---------- */
+  .events-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; min-width:0; }
+  .event-card{
+    border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; background:var(--surface);
+    transition:transform .25s ease, box-shadow .25s ease; display:flex; flex-direction:column; min-width:0;
+  }
+  .event-card:hover{ transform:translateY(-5px); box-shadow:var(--shadow); }
+  .event-thumb{ aspect-ratio:16/10; overflow:hidden; border-bottom:1px solid var(--line); background:var(--bg-deep); }
+  .event-thumb img{ width:100%; height:100%; object-fit:cover; transition:transform .4s ease; }
+  .event-card:hover .event-thumb img{ transform:scale(1.05); }
+  .event-info{ padding:22px 24px 26px; }
+  .event-info h4{ font-family:'Fraunces',serif; font-weight:600; font-size:1.15rem; margin-bottom:6px; }
+  .event-issuer{ font-size:11px; color:var(--gold-deep); margin-bottom:12px; }
+  .event-info p{ color:var(--ink-soft); line-height:1.7; font-size:0.94rem; margin-bottom:16px; }
+  .event-photos{ display:flex; gap:8px; margin-bottom:16px; }
+  .event-photos img{ width:64px; height:64px; object-fit:cover; border-radius:8px; border:1px solid var(--line); }
+  .event-link{
+    font-family:'IBM Plex Mono',monospace; font-size:11.5px; color:var(--ink);
+    border:1px solid var(--line-strong); padding:9px 16px; border-radius:100px; display:inline-block;
+    transition:all .2s ease;
+  }
+  .event-link:hover{ border-color:var(--gold-deep); color:var(--gold-deep); background:var(--gold-soft); }
+
   /* ---------- RESPONSIVE ---------- */
   @media (max-width:980px){
     .hero{ grid-template-columns:1fr; padding-top:132px; }
@@ -364,6 +387,7 @@
     .cert-grid{ grid-template-columns:repeat(2,1fr); }
     .badge-grid{ grid-template-columns:repeat(2,1fr); }
     .lead-grid{ grid-template-columns:1fr; }
+    .events-grid{ grid-template-columns:1fr; }
     .readout-grid{ grid-template-columns:repeat(3,1fr); row-gap:24px; }
     .readout-item:nth-child(3){ border-right:none; }
     .burger{ display:flex; }
@@ -414,6 +438,7 @@
       <a href="#projects">Projects</a>
       <a href="#certifications">Certifications</a>
       <a href="#badges">Badges</a>
+      <a href="#events">Events</a>
       <a href="#contact">Contact</a>
     </nav>
     <a class="nav-cta" href="mailto:achyutgupta.12@gmail.com">Say hello</a>
@@ -720,6 +745,50 @@
         </div>
       </div>
     </div>
+
+    <div class="cert-group">
+      <span class="cert-group-label">AI Courses</span>
+      <div class="cert-grid">
+        <div class="cert-card reveal">
+          <div class="cert-thumb"><img class="tone-img" src="assets/cert-guvi-chatgpt.jpg" alt="GUVI HCL ChatGPT for Students course completion certificate"></div>
+          <div class="cert-info">
+            <h5>ChatGPT for Students Course</h5>
+            <div class="cert-issuer mono">GUVI x HCL · Bharat AI Initiative, powered by OpenAI</div>
+            <div class="cert-date">Issued 20 Sep 2026 · ID: T81078yP0SU8909nY8</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cert-group">
+      <span class="cert-group-label">Quiz Participation</span>
+      <div class="cert-grid">
+        <div class="cert-card reveal">
+          <div class="cert-thumb"><img class="tone-img" src="assets/quiz-vbyld-dialogue.jpg" alt="Viksit Bharat Young Leaders Dialogue 2027 quiz certificate"></div>
+          <div class="cert-info">
+            <h5>Viksit Bharat Young Leaders Dialogue (VBYLD) 2027 Quiz</h5>
+            <div class="cert-issuer mono">Ministry of Youth Affairs &amp; Sports · MYBharat</div>
+            <div class="cert-date">12 Sep 2026</div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-thumb"><img class="tone-img" src="assets/quiz-tbmukt-bharat.jpg" alt="TB Mukt Bharat Abhiyan quiz certificate"></div>
+          <div class="cert-info">
+            <h5>Quiz on TB Mukt Bharat Abhiyan</h5>
+            <div class="cert-issuer mono">Ministry of Youth Affairs &amp; Sports · MYBharat</div>
+            <div class="cert-date">12 Sep 2026</div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-thumb"><img class="tone-img" src="assets/quiz-vbyld-mygov.jpg" alt="VBYLD 2027 Quiz certificate by MyGov"></div>
+          <div class="cert-info">
+            <h5>VBYLD 2027 Quiz</h5>
+            <div class="cert-issuer mono">Ministry of Youth Affairs &amp; Sports · MyBharat &amp; MyGov</div>
+            <div class="cert-date">2026</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -775,6 +844,44 @@
         <div class="lead-icon">✦</div>
         <h4>Member, Computer Society of India (CSI)</h4>
         <p>Active participant in a national community of computing professionals and students, engaging in technical learning and networking.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS CONDUCTED -->
+<section class="section" id="events">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="section-tag">On the ground</div>
+      <h2 class="section-title reveal">Events I've <em>conducted</em></h2>
+      <p class="section-sub reveal">Helping organize and run technical events for the student community, alongside my coursework.</p>
+    </div>
+    <div class="events-grid">
+      <div class="event-card reveal">
+        <div class="event-thumb"><img class="tone-img" src="assets/event-aayam-team.jpg" alt="Aayam 1.0 event team photo"></div>
+        <div class="event-info">
+          <h4>Aayam 1.0</h4>
+          <div class="event-issuer mono">IEEE Student Branch, AIMT</div>
+          <p>Contributed to organizing and running Aayam 1.0, a technical event featuring hands-on challenges and sessions for students, recognized with a Certificate of Excellence for outstanding contribution to the event's success.</p>
+          <div class="event-photos">
+            <img class="tone-img" src="assets/event-aayam-audience.jpg" alt="Aayam 1.0 audience session">
+            <img class="tone-img" src="assets/cert-aayam-excellence.jpg" alt="Aayam 1.0 Certificate of Excellence">
+          </div>
+          <a class="event-link" href="https://www.linkedin.com/posts/achyut-gupta-a62a24378_ieee-aayam10-ieeestudentbranch-activity-7507405124223356928-3drF?utm_source=share&utm_medium=member_desktop&rcm=ACoAAF1peuoBJFt8IfzNze1sbHIA1As1L9Dm0oM" target="_blank" rel="noopener">View event post →</a>
+        </div>
+      </div>
+      <div class="event-card reveal">
+        <div class="event-thumb"><img class="tone-img" src="assets/event-aivolve-team.jpg" alt="AIvolve event certificate handover photo"></div>
+        <div class="event-info">
+          <h4>AIvolve</h4>
+          <div class="event-issuer mono">Synapse Technical Club, AIMT</div>
+          <p>Contributed as an active member of the Synapse Technical Club toward AIvolve, an AI-focused technical event, and was recognized with a Certificate of Appreciation for dedication and teamwork.</p>
+          <div class="event-photos">
+            <img class="tone-img" src="assets/cert-synapse-appreciation.jpg" alt="Synapse Technical Club Certificate of Appreciation">
+          </div>
+          <a class="event-link" href="https://www.linkedin.com/posts/achyut-gupta-a62a24378_aivolve-artificialintelligence-ai-activity-7505668851343179776-djO0?utm_source=share&utm_medium=member_desktop&rcm=ACoAAF1peuoBJFt8IfzNze1sbHIA1As1L9Dm0oM" target="_blank" rel="noopener">View event post →</a>
+        </div>
       </div>
     </div>
   </div>
